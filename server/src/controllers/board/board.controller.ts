@@ -23,7 +23,7 @@ class BoardsController {
         
         if(!board) {
             return response.status(404).json({
-                messege: "Id Board not found"
+                messege: "Id Board não encontrado"
             })
         }
 
@@ -44,6 +44,28 @@ class BoardsController {
                 messege: "Erro ao cria o board"
             })
         }
+    }
+
+    async update (request: Request, response: Response){
+        const {boardId} =  request.params
+        const  {name} =  request.body
+
+        try {
+            const upadated_at = new Date().toISOString()
+            const upadated = await connection("boards").update({name, upadated_at}).where("id", boardId)
+            
+            if(!upadated) {
+                return response.status(404).json({messege: "Board nâo encontrado"})
+            }
+
+            const board = await connection("boards").where("id", boardId).first()
+            return response.json(board)
+        } catch (error) {
+            return response.status(500).json({
+                messege: "Erro ao atualizar o board"
+            })
+        }
+
     }
 
 }
