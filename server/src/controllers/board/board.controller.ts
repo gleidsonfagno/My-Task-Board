@@ -31,10 +31,10 @@ class BoardsController {
     }
 
     async  create(request: Request, response: Response) {
-        const {name} = request.body
+        const {name, description} = request.body
 
         try {
-            const [id] = await connection("boards").insert({name})
+            const [id] = await connection("boards").insert({name, description})
 
             const board = await connection("boards").where("id", id).first()
 
@@ -48,11 +48,11 @@ class BoardsController {
 
     async update (request: Request, response: Response){
         const {boardId} =  request.params
-        const  {name} =  request.body
+        const  {name, description} =  request.body
 
         try {
-            const upadated_at = new Date().toISOString()
-            const upadated = await connection("boards").update({name, upadated_at}).where("id", boardId)
+            const updated_at = new Date().toISOString()
+            const upadated = await connection("boards").update({name, description , updated_at}).where("id", boardId)
             
             if(!upadated) {
                 return response.status(404).json({messege: "Board nâo encontrado"})
@@ -66,6 +66,23 @@ class BoardsController {
             })
         }
 
+    }
+
+    async remove (request: Request, response: Response) {
+        const {boardId} = request.params
+
+        const existingBoard = await connection("boards").delete().where("id", boardId)
+        
+        if(!existingBoard) {
+            return response.json({
+                messege: "Board não encontrado"
+            })
+        }
+        
+        return response.json({ message: "Board deletado com sucesso" })
+
+        
+        
     }
 
 }

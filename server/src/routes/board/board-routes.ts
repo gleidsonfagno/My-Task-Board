@@ -14,4 +14,6 @@ boardsRoutes.post("/", validate(createBoardSchema), boardsController.create)
 
 boardsRoutes.put("/:boardId", validate(createBoardSchema), boardsController.update)
 
+boardsRoutes.delete("/:boardId", boardsController.remove)
+
 export {boardsRoutes}
