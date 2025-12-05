@@ -8,10 +8,10 @@ class BoardsController {
         try {
             const boards = await connection("boards").select("*");
 
-            return  response.json(boards)
+            return  response.status(200).json(boards)
         } catch (error) {
             return response.status(500).json({
-                error: "Erro ao buscar boards"
+                error: "Board not found"
             })
         }
     }
@@ -23,7 +23,7 @@ class BoardsController {
         
         if(!board) {
             return response.status(404).json({
-                messege: "Id Board não encontrado"
+                messege: "Board not found"
             })
         }
 
@@ -41,7 +41,7 @@ class BoardsController {
             return response.status(201).json(board)
         } catch (error) {
             return response.status(500).json({
-                messege: "Erro ao cria o board"
+                messege: "Failed to create board"
             })
         }
     }
@@ -55,14 +55,14 @@ class BoardsController {
             const upadated = await connection("boards").update({name, description , updated_at}).where("id", boardId)
             
             if(!upadated) {
-                return response.status(404).json({messege: "Board nâo encontrado"})
+                return response.status(404).json({messege: "Board not found"})
             }
 
             const board = await connection("boards").where("id", boardId).first()
-            return response.json(board)
+            return response.status(200).json(board)
         } catch (error) {
             return response.status(500).json({
-                messege: "Erro ao atualizar o board"
+                messege: "Failed to update board"
             })
         }
 
@@ -74,12 +74,12 @@ class BoardsController {
         const existingBoard = await connection("boards").delete().where("id", boardId)
         
         if(!existingBoard) {
-            return response.json({
-                messege: "Board não encontrado"
+            return response.status(404).json({
+                messege: "Board not found"
             })
         }
         
-        return response.json({ message: "Board deletado com sucesso" })
+        return response.json({ message: "Board deleted succesfully" })
 
         
         
