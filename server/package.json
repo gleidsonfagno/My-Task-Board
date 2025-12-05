@@ -7,7 +7,7 @@
     "knex": "knex"
   },
   "author": "Gleidson fagno",
-  "license": "ISC",
+  "license": "MIT",
   "description": "API para cadastrar tarefas ",
   "dependencies": {
     "express": "^5.1.0",
