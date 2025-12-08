@@ -8,8 +8,13 @@ const tasksRoute = Router()
 const tasksController = new TasksController()
 
 tasksRoute.get("/", tasksController.index)
+
 tasksRoute.post("/", validate(createTaskSchema), tasksController.create)
+
 tasksRoute.put("/:taskId", validate(updateTaskSchema), tasksController.update)
+
+tasksRoute.get("/:taskId", tasksController.show)
+
 tasksRoute.delete("/:taskId", tasksController.remove)
 
 export {tasksRoute}

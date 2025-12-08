@@ -18,6 +18,20 @@ class TasksController  {
         }
     }
 
+    async show (request: Request, response: Response) {
+        const {taskId} = request.params
+
+        const task = await connection("tasks").where("id", taskId).first()
+
+        if(!task) {
+            return response.json({
+                messege: "Task not fond"
+            })
+        }
+
+        return response.json(task)
+    }
+
     async create (request: Request, response: Response) {
         
         try {
