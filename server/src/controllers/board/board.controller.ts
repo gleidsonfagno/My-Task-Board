@@ -52,7 +52,7 @@ class BoardsController {
         const  {name, description} =  request.body
 
         try {
-            const updated_at = new Date().toISOString()
+            const updated_at = new Date().toString()
             const upadated = await connection("boards").update({name, description , updated_at}).where("id", boardId)
             
             if(!upadated) {
@@ -74,7 +74,7 @@ class BoardsController {
 
         const existingBoard = await connection("boards").delete().where("id", boardId)
         
-        if(!existingBoard) {
+        if(existingBoard === 0) {
             return response.status(404).json({
                 messege: "Board not found"
             })
