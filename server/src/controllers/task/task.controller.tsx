@@ -17,6 +17,33 @@ class TasksController  {
             })
         }
     }
+
+    async create (request: Request, response: Response) {
+        
+        try {
+            const {board_id, title, description, status, icon,  } = request.body 
+            const boardExists = await connection("boards").where("id", board_id).first()
+            
+            if (!boardExists) {
+                return response.status(400).json({
+                    menssege: "Board not found"
+                })
+            }
+            const [id] = await connection("tasks").insert({
+                board_id,
+                title,
+                description,
+                status,
+                icon
+            })
+
+
+            return response.status(201).json({id})
+        } catch (error) {
+            console.error(error);
+            return response.status(500).json({ error: "Internal server error" });
+        }
+    }
 }
 
 export {TasksController}

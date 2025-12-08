@@ -60,7 +60,6 @@ Body
 
 GET ```api/boards```
 
-Body
 ```json
 [
     {
