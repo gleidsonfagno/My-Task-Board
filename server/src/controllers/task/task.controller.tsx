@@ -67,6 +67,20 @@ class TasksController  {
             return response.status(500).json({ error: "Internal server error" });
         }
     }
+
+    async remove (request: Request, response: Response ) {
+        const {taskId} = request.params
+
+        const existingTask = await connection("tasks").delete().where("id", taskId)
+
+        if(existingTask === 0) {
+            return response.status(404).json({
+                messege: "Tasks not found"
+            })
+        }
+
+         return response.json({ message: "Task deleted succesfully" })
+    }
 }
 
 export {TasksController}
