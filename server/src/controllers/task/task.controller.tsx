@@ -44,6 +44,29 @@ class TasksController  {
             return response.status(500).json({ error: "Internal server error" });
         }
     }
+
+    async update (request: Request, response: Response){
+        const {taskId} = request.params
+        const {title, description, status, icon } =  request.body
+
+        try {
+            const updated_at = new Date().toString()
+            const update  = await connection("tasks").update({title, description, status, icon, updated_at}).where("id", taskId)
+            
+            if(!update) {
+                return response.status(404).json({
+                    messege: "Taks not found"
+                })
+            }
+
+            const task = await connection("tasks").where("id", taskId).first()
+            return response.status(200).json(task)
+            
+        } catch (error) {
+            console.error(error);
+            return response.status(500).json({ error: "Internal server error" });
+        }
+    }
 }
 
 export {TasksController}
