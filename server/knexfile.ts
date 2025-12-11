@@ -1,17 +1,22 @@
-export default {
-  development: {
-    client: "sqlite3",
+import type { Knex } from "knex";
+import dotenv from "dotenv";
+
+dotenv.config();
+
+const config: { [key: string]: Knex.Config } = {
+  production: {
+    client: "pg",
     connection: {
-      filename: "./src/database/database.db",
+      connectionString: process.env.DATABASE_URL,
+      ssl: {
+        rejectUnauthorized: false
+      }
     },
     migrations: {
-      extension: "ts",
       directory: "./src/database/migrations",
-    },
-    seeds: {
-      directory: "./src/database/seeds",
       extension: "ts",
     },
-    useNullAsDefault: true,
   },
 };
+
+export default config;

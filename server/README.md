@@ -8,7 +8,7 @@ API REST contruída com *Node.js*, *Express* e *Knex.js*, utilizado pra gerencia
  - Express.js
  - Knex.js
  - TypeScript
- - SQLite
+ - Neon (PostgreSQL)
  - Zod
 
 # Instalação

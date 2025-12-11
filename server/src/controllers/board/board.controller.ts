@@ -1,90 +1,90 @@
-import {Request, Response } from "express"
+import { Request, Response } from "express";
 import connection from "../../database/connection";
 
 class BoardsController {
+  async index(request: Request, response: Response) {
+    try {
+      const boards = await connection("boards").select("*");
 
-    async index(request: Request, response: Response) {
-        
-        try {
-            const boards = await connection("boards").select("*");
+      return response.status(200).json(boards);
+    } catch (error) {
+      console.log(error);
+      return response.status(500).json({
+        message: "Internal server error",
+      });
+    }
+  }
 
-            return  response.status(200).json(boards)
-        } catch (error) {
-            console.log(error)
-            return response.status(500).json({
-                message: "Internal server error"
-            })
-        }
+  async show(request: Request, response: Response) {
+    const { boardId } = request.params;
+
+    const board = await connection("boards").where("id", boardId);
+
+    if (!board) {
+      return response.status(404).json({
+        messege: "Board not found",
+      });
     }
 
-    async show(request: Request, response: Response) {
-        const {boardId } = request.params
+    return response.json(board);
+  }
 
-        const board = await connection("boards").where("id", boardId ).first()
-        
-        if(!board) {
-            return response.status(404).json({
-                messege: "Board not found"
-            })
-        }
+  async create(request: Request, response: Response) {
 
-        return response.json(board)
+    const { name, description } = request.body;
+
+    try {
+      const [board] = await connection("boards")
+        .insert({ name, description })
+        .returning("*");
+
+      return response.status(201).json(board);
+    } catch (error) {
+      return response.status(500).json({
+        messege: "Failed to create board",
+      });
+    }
+  }
+
+  async update(request: Request, response: Response) {
+    const { boardId } = request.params;
+    const { name, description } = request.body;
+
+    try {
+      const updated_at = new Date();
+      
+      const [board] = await connection("boards")
+        .where("id", boardId)
+        .update({ name, description, updated_at })
+        .returning("*");
+
+      if (!board) {
+        return response.status(404).json({ messege: "Board not found" });
+      }
+
+      return response.status(200).json(board);
+    } catch (error) {
+        console.log(error);
+      return response.status(500).json({
+        messege: "Failed to update board",
+      });
+    }
+  }
+
+  async remove(request: Request, response: Response) {
+    const { boardId } = request.params;
+
+    const existingBoard = await connection("boards")
+      .delete()
+      .where("id", boardId);
+
+    if (existingBoard === 0) {
+      return response.status(404).json({
+        messege: "Board not found",
+      });
     }
 
-    async  create(request: Request, response: Response) {
-        const {name, description} = request.body
-
-        try {
-            const [id] = await connection("boards").insert({name, description})
-
-            const board = await connection("boards").where("id", id).first()
-
-            return response.status(201).json(board)
-        } catch (error) {
-            return response.status(500).json({
-                messege: "Failed to create board"
-            })
-        }
-    }
-
-    async update (request: Request, response: Response){
-        const {boardId} =  request.params
-        const  {name, description} =  request.body
-
-        try {
-            const updated_at = new Date().toString()
-            const upadated = await connection("boards").update({name, description , updated_at}).where("id", boardId)
-            
-            if(!upadated) {
-                return response.status(404).json({messege: "Board not found"})
-            }
-
-            const board = await connection("boards").where("id", boardId).first()
-            return response.status(200).json(board)
-        } catch (error) {
-            return response.status(500).json({
-                messege: "Failed to update board"
-            })
-        }
-
-    }
-
-    async remove (request: Request, response: Response) {
-        const {boardId} = request.params
-
-        const existingBoard = await connection("boards").delete().where("id", boardId)
-        
-        if(existingBoard === 0) {
-            return response.status(404).json({
-                messege: "Board not found"
-            })
-        }
-        
-        return response.json({ message: "Board deleted succesfully" })
-
-        
-        
-    }
-
+    return response.json({ message: "Board deleted succesfully" });
+  }
 }
-export { BoardsController }
+export { BoardsController };
