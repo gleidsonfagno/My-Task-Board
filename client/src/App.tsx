@@ -1,8 +1,12 @@
+import Modal from "./components/Modal";
 import "./index.css";
 
 function App() {
+  const showMondal = true
   return (
     <>
+    
+    {showMondal ? <Modal /> : null}
       <section className="max-w-xl m-auto flex flex-col gap-12 py-12 px-4">
         <div className="flex items-start gap-4">
           <img src="/Logo.svg" alt="logo" />
@@ -76,7 +80,7 @@ function App() {
           
           </div>
 
-          <button className="bg-p text-sm flex p-2.5 rounded-2xl gap-4 items-center">
+          <button className="bg-p text-sm flex p-2.5 rounded-2xl gap-4 items-center cursor-pointer">
             <div className="bg-o p-2.5 rounded-lg max-w-[50px] ">
               <img  src="/assets/close_ring_duotone.svg" alt="close_ring_duotone" />
             </div>
