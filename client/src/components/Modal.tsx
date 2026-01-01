@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AppContext } from "../context/AppContext";
 
 const Modal = () => {
   const [selectedIcon, setSelectedIcon] = useState("");
   const icons = [
-    { value: "⏰", label: "Relógio vermelho",},
+    { value: "⏰", label: "Relógio vermelho" },
     { value: "💪", label: "Musculação" },
     { value: "🏠", label: "Casa" },
     { value: "📚", label: "Livros" },
@@ -11,12 +12,13 @@ const Modal = () => {
   ];
 
   const [status, setStatus] = useState("");
+  const { showModal, setShowModal } = useContext(AppContext);
   return (
-    <div className="fixed top-0 bottom-0 left-0 right-0 z-30 flex  justify-end text-gray-600 bg-black/50">
-      <section className="sm:w-[50%] flex flex-col m-4  gap-8 w-full  border border-gray-300/60 rounded-2xl px-8 bg-white">
+    <div onClick={() => setShowModal(!showModal)}   className="fixed top-0 bottom-0 left-0 right-0 z-30 flex  justify-end text-gray-600 bg-black/50">
+      <section onClick={(e)=> e.stopPropagation()}  className="sm:w-[50%] flex flex-col m-4  gap-8 w-full  border border-gray-300/60 rounded-2xl px-8 bg-white">
         <div className="flex flex-row justify-between py-3">
           <h2 className="text-xl">Task details</h2>
-          <button>
+          <button onClick={() => setShowModal(false)} >
             <div className="bg-cian2 p-2.5 border  border-gray-300 rounded-lg max-w-[50px] ">
               <img
                 src="/assets/close_ring_duotone.svg"
@@ -26,7 +28,7 @@ const Modal = () => {
           </button>
         </div>
 
-        <form action="" className="flex flex-col justify-between gap-8">
+        <form action=""  className="flex flex-col justify-between gap-8">
           <div className="flex flex-col">
             <label htmlFor="name" className="text-sm">
               Task name
