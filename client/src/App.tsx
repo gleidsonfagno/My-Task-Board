@@ -8,7 +8,6 @@ function App() {
   return (
     <React.StrictMode>
       <AppContextProvider>
-
       <Home />
       </AppContextProvider>
     </React.StrictMode>
