@@ -23,52 +23,57 @@
 
 ## Table of Contents
 
-- [Overview](#overview)
-  - [What I learned](#what-i-learned)
-  - [Useful resources](#useful-resources)
-- [Built with](#built-with)
-- [Features](#features)
-- [Acknowledgements](#acknowledgements)
+- [Visão geral](#visão-geral)
+  - [O que aprendi](#o-que-aprendi)
+  - [Recursos úteis](#recursos-uteis)
+- [Construído com](#Construído-com)
+- [Características](#Características)
+- [Agradecimentos](#Agradecimentos)
 
-<!-- OVERVIEW -->
+<!-- Visão gera -->
 
-## Overview
+## Visão geral
 
 ![Thumbnail for the My Task Board coding challenge](./design/thumbnail.jpg)
 
 
-### What I learned
+### O que aprendi
 
-<!-- Use this section to recap over some of your major learnings while working through this project. Writing these out and providing code samples of areas you want to highlight is a great way to reinforce your own knowledge. -->
+Apliquei os conhecimentos em React.js com TypeScript para o front-end, utilizando componentes para separar pequenas partes da aplicação, Context API para separar a regra de negócio e types para tipar as funções e os tipos de dados vindos da API, deixando o projeto mais robusto. Essa foi minha maior dificuldade inicial.
 
-### Useful resources
+No back-end, para praticar o que eu estava aprendendo de forma mais básica, utilizei Node.js com Express.js, um framework que facilita a criação de APIs REST. Também utilizei TypeScript. No início do projeto, usei o banco de dados SQLite, pois ele não necessita de servidor e funcionava corretamente na minha máquina. Utilizei o Knex como conexão com o banco de dados, mantendo a separação de responsabilidades por pastas, como controllers, routes, database e validation, garantindo que apenas dados limpos fossem recebidos.
+
+No banco de dados, enfrentei dificuldades mais uma vez, o que acabou se tornando outra oportunidade de aprendizado. Decidi então hospedar todo o projeto, incluindo o front-end, o back-end e o banco de dados. Utilizei o Vercel para o front-end e o back-end, e o banco de dados Neon PostgreSQL. Todos os serviços utilizados são gratuitos e possuem interface e dashboard, o que facilita o monitoramento e a verificação das requisições.
+
+Para o desenvolvimento deste projeto, utilizei o ChatGPT como apoio para esclarecer conteúdos e explicar funções, ajudando-me a chegar ao resultado final. No entanto, por utilizar a versão gratuita, enfrentei algumas limitações, que acabaram se tornando um aprendizado adicional: aprender a criar prompts melhores para obter respostas mais adequadas às minhas necessidades. Dessa forma, continuei estudando e praticando, e tenho certeza de que adquiri conhecimento mesmo utilizando uma IA, pois, em vez de apenas copiar e colar, sempre buscava entender o código, adaptá-lo ao meu projeto e compreender seu funcionamento.
+
+Para manter a constância nos estudos, utilizei os recursos do GitHub Projects, criando milestones e issues para serem finalizadas aos poucos, mantendo o estudo contínuo e a prática constante. Assim, mesmo quando paro por um tempo, já tenho um desafio definido para retomar o projeto.
+
+
+
+
+### Recursos úteis
 
 <!--
 - [Example resource 1](https://www.example.com) - This helped me for XYZ reason. I really liked this pattern and will use it going forward.
 - [Example resource 2](https://www.example.com) - This is an amazing article which helped me finally understand XYZ. I'd recommend it to anyone still learning this concept.
 -->
 
-### Built with
+### Construído com
 
-- Semantic HTML5 markup
-- CSS custom properties
-- Flexbox
-- CSS Grid
-- [React](https://reactjs.org/)
-- [Node.js](https://nodejs.org/pt)
-- [Express.js](https://expressjs.com/)
+- React.js
+- TypeScript
+- Node.js
+- Express.js
+- SQLite
+- PostgreSQL (Neon)
+- Knex.js
+- GitHub Projects
+- Vercel
 
-## Features
+## Características
 
 <!-- List the features of your application or follow the template. Don't share the figma file here :) -->
 
-This application/site was created as a submission to a [DevChallenges](https://devchallenges.io/challenges-dashboard) challenge.
+Este aplicativo/site foi criado como uma submissão para um desafio [DevChallenges](https://devchallenges.io/challenges-dashboard) .
 
-## Acknowledgements
-
-<!-- This section should list any articles or add-ons/plugins that helps you to complete the project. This is optional but it will help you in the future. For exmpale -->
-
-## Author
-
-- Website [gleidsonfagno.com](https://www.gleidsonfagno.com.br/)
-- GitHub [@gleidsonfagno](https://github.com/gleidsonfagno})
