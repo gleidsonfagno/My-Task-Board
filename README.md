@@ -1,16 +1,15 @@
 <!-- Please update value in the {}  -->
-
-<h1 align="center">My-Task-Board | devChallenges</h1>
+# My-Task-Board 
 
 
 <div align="center">
   <h3>
-    <a href="{https://your-demo-link.your-domain}">
-      Demo
+    <a href="https://my-task-board-6whv.vercel.app/}">
+      Front end
     </a>
     <span> | </span>
-    <a href="{https://your-url-to-the-solution}">
-      Solution
+    <a href="{ https://my-task-board-sigma.vercel.app/board}">
+      API
     </a>
     <span> | </span>
     <a href="https://devchallenges.io/challenge/my-task-board-app">
@@ -21,14 +20,13 @@
 
 <!-- TABLE OF CONTENTS -->
 
-## Table of Contents
+## Índice
 
 - [Visão geral](#visão-geral)
   - [O que aprendi](#o-que-aprendi)
   - [Recursos úteis](#recursos-uteis)
 - [Construído com](#Construído-com)
 - [Características](#Características)
-- [Agradecimentos](#Agradecimentos)
 
 <!-- Visão gera -->
 
