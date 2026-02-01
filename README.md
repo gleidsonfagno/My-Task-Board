@@ -4,11 +4,11 @@
 
 <div align="center">
   <h3>
-    <a href="https://my-task-board-6whv.vercel.app/}">
+    <a href="https://my-task-board-6whv.vercel.app/">
       Front end
     </a>
     <span> | </span>
-    <a href="{ https://my-task-board-sigma.vercel.app/board}">
+    <a href="https://my-task-board-sigma.vercel.app/board">
       API
     </a>
     <span> | </span>
