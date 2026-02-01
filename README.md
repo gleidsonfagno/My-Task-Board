@@ -8,7 +8,7 @@
       Front end
     </a>
     <span> | </span>
-    <a href="https://my-task-board-sigma.vercel.app/board">
+    <a href="https://my-task-board-sigma.vercel.app/api/boards">
       API
     </a>
     <span> | </span>
