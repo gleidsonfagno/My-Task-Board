@@ -2,6 +2,8 @@ import { Router } from "express";
 import { BoardsController } from "../../controllers/board/board.controller";
 import { validate } from "../../middlewares/board/middleware";
 import { createBoardSchema } from "../../validations/create-board.schema";
+import { tasksRoute } from "../task/task-routes";
+
 
 const boardsRoutes = Router()
 const boardsController = new BoardsController()
@@ -15,5 +17,7 @@ boardsRoutes.post("/", validate(createBoardSchema), boardsController.create)
 boardsRoutes.put("/:boardId", validate(createBoardSchema), boardsController.update)
 
 boardsRoutes.delete("/:boardId", boardsController.remove)
+
+boardsRoutes.use("/:boardId/tasks", tasksRoute)
 
 export {boardsRoutes}

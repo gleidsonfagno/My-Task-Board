@@ -18,15 +18,19 @@ class BoardsController {
   async show(request: Request, response: Response) {
     const { boardId } = request.params;
 
-    const board = await connection("boards").where("id", boardId);
+    const board = await connection("boards").where("id", boardId).first();
 
     if (!board) {
       return response.status(404).json({
         messege: "Board not found",
       });
     }
+    const tasks = await connection("tasks").where("board_id", boardId)
 
-    return response.json(board);
+    return response.json({
+      ...board,
+      tasks,
+    });
   }
 
   async create(request: Request, response: Response) {

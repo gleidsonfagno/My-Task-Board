@@ -3,7 +3,7 @@ import { TasksController } from "../../controllers/";
 import { validate } from "../../middlewares/board/middleware";
 import { createTaskSchema, updateTaskSchema } from "../../validations/create-task.schema";
 
-const tasksRoute = Router()
+const tasksRoute = Router({ mergeParams: true})
 
 const tasksController = new TasksController()
 

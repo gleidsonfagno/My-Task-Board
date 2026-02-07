@@ -5,7 +5,9 @@ import connection from "../../database/connection";
 class TasksController {
   async index(request: Request, response: Response) {
     try {
-      const task = await connection("tasks").select("*");
+      const {boardId} = request.params;
+
+      const task = await connection("tasks").where("board_id", boardId)
 
       return response.status(200).json(task);
     } catch (error) {
@@ -19,7 +21,7 @@ class TasksController {
   async show(request: Request, response: Response) {
     const { taskId } = request.params;
 
-    const task = await connection("tasks").where("id", taskId);
+    const task = await connection("tasks").where("id", taskId).first();
 
     if (!task) {
       return response.json({
@@ -31,10 +33,11 @@ class TasksController {
   }
 
   async create(request: Request, response: Response) {
-    const { board_id, title, description, status, icon } = request.body;
+    const {boardId } = request.params;
+    const { title, description, status, icon } = request.body;
 
     try {
-      const boardExists = await connection("boards").where("id", board_id);
+      const boardExists = await connection("boards").where("id", boardId).first();
 
       if (!boardExists) {
         return response.status(400).json({
@@ -43,14 +46,13 @@ class TasksController {
       }
       const [id] = await connection("tasks")
         .insert({
-          board_id,
+          board_id: boardId,
           title,
           description,
           status,
           icon,
         })
         .returning("*");
-
 
       return response.status(201).json(id);
     } catch (error) {
@@ -70,7 +72,6 @@ class TasksController {
         .where("id", taskId)
         .update({ title, description, status, icon, updated_at })
         .returning("*")
-
 
       if (!task) {
         return response.status(404).json({
