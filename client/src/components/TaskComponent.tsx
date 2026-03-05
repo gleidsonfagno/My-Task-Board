@@ -1,49 +1,37 @@
-import type React from "react";
 
-type TaskProps = {
-  showModal: boolean;
-  setShowModal: (value: boolean) => void;
-  title: string;
-  icon: string;
-  status: string;
-};
+// type TaskProps = {
+//   task: Task;
+//   status: string;
+// };
 
 const statusStyles: Record<TaskProps["status"], string> = {
-  Completed: "bg-g1",
+  "Completed": "bg-g1",
   "In Progress": "bg-y",
   "Won't do": "bg-p2",
 };
 
-const Task: React.FC<TaskProps> = ({
-  showModal,
-  setShowModal,
-  title,
-  // icon,
-  status,
-}) => {
+const TaskComponent: React.FC<TaskProps> = ({ task }) => {
   return (
     <button
-      onClick={() => setShowModal(!showModal)}
-      className={`${statusStyles[status]} p-2.5 rounded-2xl flex justify-between items-center cursor-pointer`}
+      className={`${statusStyles[task.status]} p-2.5 rounded-2xl flex justify-between items-center cursor-pointer`}
     >
       <div className="flex items-center gap-4 ">
         <div className="p-1.5 bg-w rounded-lg max-w-[50px]">
           <img
             width="48"
             height="48"
-            // src={icon}
             src="https://img.icons8.com/emoji/48/bullseye.png"
             alt="martial-arts-uniform-emoji"
           />
         </div>
-        <h4 className="text-xl">{title}</h4>
+        <h4 className="text-xl">{task.title}</h4>
       </div>
 
-      {status === "Completed" ? (
+      {task.status === "Completed" ? (
         <div className="p-1.5 bg-g2 rounded-lg">
           <img src="../../assets/Done_round.svg" alt="Time_atack_duotone" />
         </div>
-      ) : status === "In Progress" ? (
+      ) : task.status === "In Progress" ? (
         <div className="p-1.5 bg-o rounded-lg">
           <img src="../../assets/Done_round.svg" alt="Done_round" />
         </div>
@@ -59,4 +47,4 @@ const Task: React.FC<TaskProps> = ({
   );
 };
 
-export default Task;
+export default TaskComponent;
