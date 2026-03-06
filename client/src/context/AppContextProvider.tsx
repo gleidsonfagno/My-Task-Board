@@ -1,12 +1,13 @@
 
 import { useCallback, useState } from "react";
-import { type Board } from "../types/data";
+import { type Board, type CreateTaskData, type Task } from "../types/data";
 import { getBoard, saveBoard } from "../utils/storage";
 import { AppContext } from "./AppContext";
 
 const AppContextProvider = ({ children }: { children: React.ReactNode }) => {
   const [board, setBoard] = useState<Board | null>(null);
 
+  // eslint-disable-next-line react-hooks/preserve-manual-memoization
   const createBoardIfNotExists = useCallback(() => {
     const existingBoard = getBoard();
 
@@ -16,7 +17,7 @@ const AppContextProvider = ({ children }: { children: React.ReactNode }) => {
     }
 
     const newBoard: Board = {
-      id: crypto.randomUUID(),
+      id: "9",
       title: "My Task Board",
       description: "Tasks to keep organized",
       tasks: [
@@ -26,7 +27,7 @@ const AppContextProvider = ({ children }: { children: React.ReactNode }) => {
           description: "Descrição 1",
           icon: "https://img.icons8.com/color/48/000000/idea.png",
           status: "In Progress",
-          board_id: 0,
+          board_id: 9,
           created_at: new Date().toISOString(),
           updated_at: new Date().toISOString()
         },
@@ -36,7 +37,7 @@ const AppContextProvider = ({ children }: { children: React.ReactNode }) => {
           description: "Descrição 2",
           icon: "https://img.icons8.com/color/48/000000/muscle.png",
           status: "Completed",
-          board_id: 0,
+          board_id: 9,
           created_at: new Date().toISOString(),
           updated_at: new Date().toISOString()
         },
@@ -46,7 +47,7 @@ const AppContextProvider = ({ children }: { children: React.ReactNode }) => {
           description: "Descrição 3",
           icon: "https://img.icons8.com/color/48/000000/idea.png",
           status: "Won't do",
-          board_id: 0,
+          board_id: 9,
           created_at: new Date().toISOString(),
           updated_at: new Date().toISOString()
         },
@@ -58,10 +59,32 @@ const AppContextProvider = ({ children }: { children: React.ReactNode }) => {
     
   }, []);
 
+  const addTask = (taskData: CreateTaskData) => {
+    if(!board) return;
+
+    const newTask: Task = {
+      ...taskData,
+      id: crypto.randomUUID(),
+      board_id: 9,
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString()
+    }
+
+    const updatedBoard: Board = {
+    ...board,
+    tasks: [...board.tasks, newTask],
+  };
+
+    setBoard(updatedBoard)
+    saveBoard(updatedBoard)
+  }
+  
+  
 
   const value = {
     board,
-    createBoardIfNotExists
+    addTask,
+    createBoardIfNotExists,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

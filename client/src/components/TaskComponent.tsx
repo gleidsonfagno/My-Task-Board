@@ -1,18 +1,24 @@
+import type { Task } from "../types/data";
 
-// type TaskProps = {
-//   task: Task;
-//   status: string;
-// };
+type TaskProps = {
+  task: Task;
+  onEdit: () => void;
+};
 
-const statusStyles: Record<TaskProps["status"], string> = {
+type Status = {
+  status: string;
+}
+
+const statusStyles: Record<Status["status"], string> = {
   "Completed": "bg-g1",
   "In Progress": "bg-y",
   "Won't do": "bg-p2",
 };
 
-const TaskComponent: React.FC<TaskProps> = ({ task }) => {
+const TaskComponent: React.FC<TaskProps> = ({ task, onEdit }) => {
   return (
     <button
+    onClick={onEdit}
       className={`${statusStyles[task.status]} p-2.5 rounded-2xl flex justify-between items-center cursor-pointer`}
     >
       <div className="flex items-center gap-4 ">
@@ -20,7 +26,7 @@ const TaskComponent: React.FC<TaskProps> = ({ task }) => {
           <img
             width="48"
             height="48"
-            src="https://img.icons8.com/emoji/48/bullseye.png"
+            src={task.icon}
             alt="martial-arts-uniform-emoji"
           />
         </div>

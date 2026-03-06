@@ -17,3 +17,10 @@ export interface Board {
   description: string;
   tasks: Task[];
 }
+
+export type CreateTaskData = {
+  title: string
+  description: string
+  status: string
+  icon: string
+}
