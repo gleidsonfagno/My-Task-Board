@@ -3,6 +3,7 @@ import type { Board, CreateTaskData } from "../types/data";
 interface AppContextType { 
   board: Board | null | undefined;
   addTask: (taskData: CreateTaskData) => void
+  deleteTask: (id: string) => void
   createBoardIfNotExists: () => void;
 }
 

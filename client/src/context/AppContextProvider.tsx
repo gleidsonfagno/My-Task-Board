@@ -79,11 +79,23 @@ const AppContextProvider = ({ children }: { children: React.ReactNode }) => {
     saveBoard(updatedBoard)
   }
   
+  const deleteTask =  (id: string) => {
+    if(!id  || !board) return;
+
+    const updatedBoard = {
+      ...board,
+      tasks: board?.tasks.filter(task => task.id !== id)
+    }
+
+    setBoard(updatedBoard);
+    saveBoard(updatedBoard)
+  }
   
 
   const value = {
     board,
     addTask,
+    deleteTask,
     createBoardIfNotExists,
   };
 

@@ -8,7 +8,7 @@ type ModalProps = {
 };
 
 const Form: React.FC<ModalProps> = ({ selectedTask, onClose }) => {
-  const { addTask } = useAppContext();
+  const { addTask, deleteTask } = useAppContext();
 
   const [title, setTitle] = useState(selectedTask?.title ?? "");
   const [description, setDescription] = useState(
@@ -177,7 +177,13 @@ const Form: React.FC<ModalProps> = ({ selectedTask, onClose }) => {
           </div>
 
           <div className="mt-36 flex gap-2 justify-end">
-            <button className="px-3 py-1 bg-red-500 text-white rounded">
+            <button onClick={() => {
+              if(selectedTask){
+                deleteTask(selectedTask.id);
+                onClose();
+              }
+            }
+            } className="px-3 py-1 bg-red-500 text-white rounded">
               Delete
             </button>
             <button
